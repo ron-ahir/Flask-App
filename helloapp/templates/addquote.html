@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2 style = "text-align: center;">User Input Form</h2>
+<form action = "" method = post>
+         <fieldset>
+            <legend>User Input Form</legend>
+            {{ form.csrf_token }}
+            <div style = "font-size:20px; font-weight:bold; margin-left:150px;" >
+               {{ form.fname.label }} : {{ form.fname }} <br><br>
+               {{ form.lname.label }} : {{ form.lname }} <br><br>
+               {{ form.email.label }} : {{ form.email }} <br><br>
+               {{ form.submit }}
+            </div>
+         </fieldset>
+      </form>
+{% endblock %}

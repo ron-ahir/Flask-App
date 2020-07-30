@@ -1,4 +1,5 @@
 from flask import render_template
+from .forms import QuoteForm
 from helloapp import app
 
 quotes = [
@@ -22,4 +23,10 @@ def hello_user(username):
 def display_quotes():
     ls=str(quotes)
     return render_template('quotes.html',quote=quotes)
+
+@app.route('/addquote/')
+def add_quote():
+    form=QuoteForm()
+    return render_template('addquote.html',form=form)
+
 
