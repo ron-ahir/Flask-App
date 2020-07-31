@@ -1,4 +1,5 @@
 from flask import render_template
+import random
 from .forms import QuoteForm
 from helloapp import app
 
@@ -17,7 +18,8 @@ def hello():
 
 @app.route('/hello/<username>/')
 def hello_user(username):
-    return render_template('hello_user.html', user=username)
+    quote=random.choice(quotes)
+    return render_template('hello_user.html', user=username, quote=quote)
 
 @app.route('/quotes/')
 def display_quotes():

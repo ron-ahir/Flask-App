@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2 style = "text-align: center;">User Input Form</h2>
+    <h2 style = "text-align: center;">Quote Input Form</h2>
 <form action = "" method = post>
          <fieldset>
-            <legend>User Input Form</legend>
+            <legend>Add a new quote</legend>
             {{ form.csrf_token }}
             <div style = "font-size:20px; font-weight:bold; margin-left:150px;" >
-               {{ form.fname.label }} : {{ form.fname }} <br><br>
-               {{ form.lname.label }} : {{ form.lname }} <br><br>
-               {{ form.email.label }} : {{ form.email }} <br><br>
+               {{ form.qstring.label }} : {{ form.qstring }} <br><br>
+               {{ form.qauthor.label }} : {{ form.qauthor }} <br><br>
                {{ form.submit }}
             </div>
          </fieldset>
