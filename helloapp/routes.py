@@ -1,7 +1,8 @@
-from flask import render_template
+from flask import render_template, request
 import random
 from .forms import QuoteForm
-from helloapp import app
+from .models import Quotes
+from helloapp import app, db
 
 quotes = [
                 "By the time a man realizes that maybe his father was right, he usually has a son who thinks he's wrong.",
@@ -23,12 +24,20 @@ def hello_user(username):
 
 @app.route('/quotes/')
 def display_quotes():
-    ls=str(quotes)
-    return render_template('quotes.html',quote=quotes)
+    allquotes=Quotes.query.all()
+    return render_template('quotes.html',allquotes=allquotes)
 
-@app.route('/addquote/')
+@app.route('/addquote/', methods=['GET','POST'])
 def add_quote():
     form=QuoteForm()
+    if request.method == 'POST':
+        qt = Quotes(qstring=form.qstring.data, qauthor=form.qauthor.data)
+        try:
+            db.session.add(qt)
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
+        return render_template('addquote_confirmation.html', title='Add Quote Confirmation', quote=form.qstring.data)
     return render_template('addquote.html',form=form)
 
 
